@@ -1,0 +1,22 @@
+version: "3.0"
+services:
+  jupyter-visualize:
+    container_name: jupyter-visualize
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: dev
+    volumes:
+      - venv:/root/jupyter-visualize/.venv/
+      - jupyter-config:/root/.jupyter/
+      - ../:/root/app/
+    environment:
+      - SHELL=/bin/bash
+    ports:
+      - ${port:-8888}:8888
+    tty: true
+
+
+volumes:
+  venv:
+  jupyter-config:
