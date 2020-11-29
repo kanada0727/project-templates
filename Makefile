@@ -3,7 +3,7 @@ export ENV?=development
 ifeq (${ENV}, production)
 	dc := docker-compose -f docker/docker-compose.yml
 else
-	dc := docker-compose -f docker/docker-compose.yml -f docker/docker-compose.override.yml
+	dc := docker-compose -f docker/docker-compose.yml -f docker/docker-compose.development.yml
 endif
 
 dc-exec := $(dc) exec app
