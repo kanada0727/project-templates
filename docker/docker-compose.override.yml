@@ -2,8 +2,6 @@ version: "3.0"
 services:
   app:
     container_name: ${PROJECT_NAME}-app-dev
-    build:
-      target: dev
     image: ${PROJECT_NAME}_app-dev:latest
     volumes:
       - ../:/root/${PROJECT_NAME}/

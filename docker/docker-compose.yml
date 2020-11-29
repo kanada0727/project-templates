@@ -5,7 +5,7 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-      target: prod
+      target: ${ENV}
       args:
         - PROJECT_NAME=${PROJECT_NAME}
     environment:
