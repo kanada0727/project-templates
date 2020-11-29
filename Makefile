@@ -9,10 +9,7 @@ endif
 dc-exec := $(dc) exec app
 python-exec := $(dc-exec) pipenv run
 
-.PHONY: build setup setup-development setup-production up down erase sh password jupyter
-
-build:
-	$(dc) build
+.PHONY: setup setup-development setup-production build up down stop start erase sh password jupyter
 
 setup:
 	make "setup-$(ENV)"
@@ -26,11 +23,20 @@ setup-development:
 
 setup-production: build
 
+build:
+	$(dc) build
+
 up:
 	$(dc) up -d
 
 down:
 	$(dc) down
+
+stop:
+	$(dc) stop
+
+start:
+	$(dc) start
 
 erase:
 	$(dc) down -v
@@ -44,4 +50,4 @@ password:
 	make up
 
 jupyter:
-	$(python-exec) jupyter lab --allow-root --ip 0.0.0.0
+	$(dc) exec -d app pipenv run jupyter lab --allow-root --ip 0.0.0.0
