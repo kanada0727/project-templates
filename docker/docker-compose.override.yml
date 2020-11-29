@@ -1,13 +1,14 @@
 version: "3.0"
 services:
-  jupyter-visualize:
-    container_name: jupyter-visualize-dev
+  app:
+    container_name: ${PROJECT_NAME}-app-dev
     build:
       target: dev
+    image: ${PROJECT_NAME}_app-dev:latest
     volumes:
-      - venv:/root/app/.venv/
+      - ../:/root/${PROJECT_NAME}/
+      - venv:/root/${PROJECT_NAME}/.venv/
       - jupyter-config:/root/.jupyter/
-      - ../:/root/app/
       - ~/.ssh/:/root/.ssh/:ro
     ports:
       - ${port:-8888}:8888
