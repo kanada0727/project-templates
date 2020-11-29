@@ -1,0 +1,16 @@
+version: "3.0"
+services:
+  jupyter-visualize:
+    container_name: jupyter-visualize-dev
+    build:
+      target: dev
+    volumes:
+      - venv:/root/app/.venv/
+      - jupyter-config:/root/.jupyter/
+      - ../:/root/app/
+      - ~/.ssh/:/root/.ssh/:ro
+    ports:
+      - ${port:-8888}:8888
+volumes:
+  venv:
+  jupyter-config:

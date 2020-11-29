@@ -1,0 +1,5 @@
+.venv
+.vscode
+.idea
+.devcontainer
+**/.ipynb_checkpoints

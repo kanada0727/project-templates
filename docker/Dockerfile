@@ -13,6 +13,6 @@ RUN apt install -y procps
 CMD ["/bin/bash"]
 
 FROM base as prod
-COPY ./Pipfile* ./
+COPY ./ ./
 RUN pipenv install --deploy
 CMD ["/bin/bash"]
