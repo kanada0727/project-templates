@@ -9,19 +9,22 @@ endif
 dc-exec := $(dc) exec app
 python-exec := $(dc-exec) pipenv run
 
-.PHONY: build build-development build-production up down erase sh password jupyter
+.PHONY: build setup setup-development setup-production up down erase sh password jupyter
 
 build:
-	make "build-$(ENV)"
+	$(dc) build
 
-build-development:
+setup:
+	make "setup-$(ENV)"
+
+setup-development:
 	$(dc) build
 	make up
 	$(dc-exec) pipenv install --dev --deploy
 	$(dc-exec) sh install_labextensions
+	make password
 
-build-production:
-	$(dc) build
+setup-production: build
 
 up:
 	$(dc) up -d
