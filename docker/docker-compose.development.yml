@@ -3,6 +3,7 @@ services:
   app:
     container_name: ${PROJECT_NAME}-app-dev
     image: ${PROJECT_NAME}_app-dev:latest
+    working_dir: /root/workspace
     volumes:
       - ../:/root/workspace/
       - venv:/root/workspace/.venv/
@@ -12,4 +13,8 @@ services:
       - ${port:-8888}:8888
 volumes:
   venv:
+    external:
+      name: venv-${PROJECT_NAME}
   jupyter-config:
+    external:
+      name: jupyter-config

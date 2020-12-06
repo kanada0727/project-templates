@@ -19,7 +19,7 @@ FROM base as development
 RUN apt update && apt install -y procps git
 # install nodejs for jupyter lab
 RUN apt install -y nodejs npm
-CMD ["pipenv", "run", "jupyter", "lab", "--allow-root", "--ip", "0.0.0.0"]
+CMD ["/bin/bash"]
 
 #---#
 FROM base as production
