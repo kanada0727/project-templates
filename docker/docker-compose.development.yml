@@ -4,8 +4,8 @@ services:
     container_name: ${PROJECT_NAME}-app-dev
     image: ${PROJECT_NAME}_app-dev:latest
     volumes:
-      - ../:/root/${PROJECT_NAME}/
-      - venv:/root/${PROJECT_NAME}/.venv/
+      - ../:/root/workspace/
+      - venv:/root/workspace/.venv/
       - jupyter-config:/root/.jupyter/
       - ~/.ssh/:/root/.ssh/:ro
     ports:
