@@ -15,6 +15,11 @@ cufflinks = "*"
 chart-studio = "*"
 black = "==20.8b1"
 flake8 = "*"
+isort = "*"
+vulture = "*"
+
+[scripts]
+jupyter-lab = "pipenv run jupyter lab --allow-root --ip 0.0.0.0"
 
 [requires]
 python_version = "3.8"
