@@ -9,34 +9,34 @@ else
 endif
 
 dc-exec := $(dc) exec app
-python-exec := $(dc-exec) pipenv run
+python-exec := $(dc-exec) poetry run
 
 .PHONY: setup setup-development setup-production \
-		create-volumes pipenv-deploy install-labextensions password \
+		create-volumes poetry-install-dev install-labextensions update-password \
 		build up down stop start erase sh jupyter
 
 setup:
-	make "setup-$(ENV)"
+	$(MAKE) "setup-$(ENV)"
 
 setup-production: build
 
-setup-development: build create-volumes up pipenv-deploy install-labextensions
+setup-development: build create-volumes up poetry-install-dev install-labextensions
+
+poetry-install-dev:
+	$(dc-exec) poetry install
+
+install-labextensions:
+	$(dc-exec) sh install_labextensions
 
 create-volumes:
 	docker volume create --name jupyter-config
 	docker volume create --name venv-${PROJECT_NAME}
 
-pipenv-deploy:
-	$(dc-exec) pipenv install --dev --deploy
-
-install-labextensions:
-	$(dc-exec) sh install_labextensions
-
-password:
-	$(python-exec) jupyter notebook password
+remove-volumes:
+	docker volume rm venv-${PROJECT_NAME}
 
 build:
-	$(dc) build
+	$(dc) build $(ARGS)
 
 up:
 	$(dc) up -d
@@ -51,10 +51,14 @@ start:
 	$(dc) start
 
 erase:
-	$(dc) down -v
+	$(dc) down
+	$(MAKE) remove-volumes
 
 sh:
 	$(dc-exec) /bin/bash
 
 jupyter:
-	$(dc) exec -d app pipenv run jupyter lab --allow-root --ip 0.0.0.0
+	$(python-exec) task run jupyter
+
+update-password:
+	$(python-exec) task jupyter-update-password

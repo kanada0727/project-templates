@@ -16,7 +16,7 @@
     "python.formatting.provider": "black",
     "python.formatting.blackPath": "${workspaceFolder}/.venv/bin/black",
     "python.sortImports.path": "${workspaceFolder}/.venv/bin/isort",
-    "python.terminal.activateEnvironment": true, // activate pipenv on starting shell
+    "python.terminal.activateEnvironment": true, // activate poetry on starting shell
     "workbench.editorAssociations": [
         {
             "viewType": "jupyter.notebook.ipynb",
