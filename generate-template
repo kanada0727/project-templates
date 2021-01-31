@@ -1,0 +1,49 @@
+#!/bin/bash
+
+EXECUTE_PATH=$(pwd)
+SCRIPT_PATH=$(cd "$(dirname "$0")" && pwd)
+TEMPLATES=("python-cpu" "python-gpu")
+
+help () {
+    # Display Help
+   echo "Usage: generate-template [template name] [project name]"
+   echo "arguments:"
+   echo "   template name: one of: [${TEMPLATES[*]}]"
+   echo "   project name: output project name"
+}
+
+contains() {
+    for entity in $1; do
+        if [ "$entity" = "$2" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+validate ()
+{   
+    if [ $# -eq 2 ] && contains "${TEMPLATES[*]}" "$TEMPLATE_NAME" ; then
+        :
+    else
+        help
+        exit 1
+    fi
+}
+
+TEMPLATE_NAME="$1"
+PROJECT_NAME="$2"
+
+validate "$@"
+
+TEMPLATE_PATH="$SCRIPT_PATH/$TEMPLATE_NAME"
+PROJECT_PATH="$EXECUTE_PATH/$PROJECT_NAME"
+
+find "$TEMPLATE_PATH" -type f |
+{
+    while IFS= read -r file; do
+        newfile="$PROJECT_PATH${file#$TEMPLATE_PATH}"
+        mkdir -p "$(dirname "$newfile")"
+        sed "s/\[PROJECT_NAME\]/$PROJECT_NAME/g" "$file" > "$newfile"
+    done
+}

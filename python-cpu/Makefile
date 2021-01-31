@@ -1,5 +1,4 @@
-include .env
-export
+export PROJECT_NAME=[PROJECT_NAME]
 export ENV?=development
 
 ifeq (${ENV}, production)

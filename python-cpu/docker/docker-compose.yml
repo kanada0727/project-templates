@@ -1,13 +1,12 @@
 version: "3.0"
 services:
   app:
-    container_name: ${PROJECT_NAME}-app
+    container_name: [PROJECT_NAME]-app
+    image: [PROJECT_NAME]_app:latest
     build:
       context: ..
       dockerfile: docker/Dockerfile
       target: ${ENV}
-      args:
-        - PROJECT_NAME=${PROJECT_NAME}
     environment:
       - SHELL=/bin/bash
     tty: true
