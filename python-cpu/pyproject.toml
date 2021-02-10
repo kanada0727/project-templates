@@ -5,8 +5,8 @@ description = ""
 authors = ["kanada0727 <kanada@pcl.cs.waseda.ac.jp>"]
 
 [tool.taskipy.tasks]
-jupyter= "pipenv run jupyter lab --allow-root --ip 0.0.0.0"
-jupyter-update-password= "poetry run jupyter notebook password"
+jupyter= "poetry run jupyter lab --allow-root --ip 0.0.0.0"
+jupyter-update-password= "poetry run jupyter server password"
 
 [tool.poetry.dependencies]
 python = "^3.8"
