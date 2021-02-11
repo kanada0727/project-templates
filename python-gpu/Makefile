@@ -57,7 +57,7 @@ sh:
 	$(dc-exec) /bin/bash
 
 jupyter:
-	$(python-exec) task run jupyter
+	$(python-exec) task jupyter
 
 update-password:
 	$(python-exec) task jupyter-update-password

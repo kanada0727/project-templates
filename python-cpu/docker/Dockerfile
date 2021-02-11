@@ -64,7 +64,7 @@ WORKDIR $PROJECT_PATH
 COPY ./ ./
 
 ###### --- copy python runtime ---
-COPY --from=production-builder $PROJECT_PATH/.venv/ ./venv
+COPY --from=production-builder $PROJECT_PATH/.venv/ ./.venv
 ENV PATH $PATH:$PROJECT_PATH/.venv/bin/python3
 
 CMD ["/bin/bash"]

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "test-gpu"
+name = "[PROJECT_NAME]"
 version = "0.1.0"
 description = ""
 authors = ["kanada0727 <kanada@pcl.cs.waseda.ac.jp>"]
