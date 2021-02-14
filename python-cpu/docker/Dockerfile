@@ -36,6 +36,7 @@ RUN apt update && apt install -y procps git vim curl
 ###### NOTE: put this code in the end to share cache with other projects
 ENV PROJECT_PATH /root/[PROJECT_NAME]
 WORKDIR $PROJECT_PATH
+ENV WORKDIR $PROJECT_PATH
 CMD ["/bin/bash"]
 
 ###-----------------------------------------------
