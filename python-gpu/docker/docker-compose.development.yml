@@ -8,6 +8,7 @@ services:
       - venv:/root/[PROJECT_NAME]/.venv/
       - jupyter-config:/root/.jupyter/
       - ~/.ssh/:/root/.ssh/:ro
+      - ~/.gitconfig:/root/.gitconfig:ro
     ports:
       - ${port:-8888}:8888
 volumes:
