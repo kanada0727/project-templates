@@ -23,6 +23,12 @@
     "python.terminal.activateEnvironment": true, // activate poetry on starting shell
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 500,
+    "files.watcherExclude": {
+        "**/.git": true,
+        "**/.ipynb_checkpoints": true,
+        "**/.venv": true,
+        "**/__pycache__": true,
+    },
     "files.exclude": {
         "**/.git": true,
         "**/.ipynb_checkpoints": true,
