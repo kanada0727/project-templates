@@ -35,7 +35,7 @@
         "**/.venv": true,
         "**/__pycache__": true,
     },
-    "remote.SSH.localServerDownload": "always", // cache extension locally and send it on starting container; for speedup
+    "remote.SSH.localServerDownload": "auto", // cache extension locally and send it on starting container; for speedup
     "remote.autoForwardPorts": false,
     "workbench.editor.enablePreview": false,
     "workbench.list.openMode": "doubleClick",
