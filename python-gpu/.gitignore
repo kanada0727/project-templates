@@ -1,4 +1,5 @@
 .venv
+__pypackages__
 .vscode/*
 !.vscode/settings.json
 **/.ipynb_checkpoints/

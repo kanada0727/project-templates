@@ -3,4 +3,8 @@ services:
   app:
     container_name: [PROJECT_NAME]-app-dev-vscode
     command: /bin/sh -c "while sleep 1000; do :; done"
-    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]

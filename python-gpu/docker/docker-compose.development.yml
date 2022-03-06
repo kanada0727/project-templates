@@ -5,16 +5,14 @@ services:
     image: [PROJECT_NAME]_app-dev:latest
     volumes:
       - ../:/root/[PROJECT_NAME]/
-      - venv:/root/[PROJECT_NAME]/.venv/
-      - jupyter-config:/root/.jupyter/
+      - pypackages-[PROJECT_NAME]:/root/[PROJECT_NAME]/__pypackages__/
+      - cache:/root/.cache
       - ~/.ssh/:/root/.ssh/:ro
       - ~/.gitconfig:/root/.gitconfig:ro
     ports:
       - ${port:-8888}:8888
 volumes:
-  venv:
-    external:
-      name: venv-[PROJECT_NAME]
-  jupyter-config:
-    external:
-      name: jupyter-config
+  pypackages-[PROJECT_NAME]:
+  cache:
+    external: true
+    name: local-cache

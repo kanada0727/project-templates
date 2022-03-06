@@ -21,7 +21,7 @@ contains() {
     return 1
 }
 
-validate ()
+validate_arguments ()
 {   
     if [ $# -eq 2 ] && contains "${TEMPLATES[*]}" "$TEMPLATE_NAME" ; then
         :
@@ -34,16 +34,16 @@ validate ()
 TEMPLATE_NAME="$1"
 PROJECT_NAME="$2"
 
-validate "$@"
+validate_arguments "$@"
 
 TEMPLATE_PATH="$SCRIPT_PATH/$TEMPLATE_NAME"
 PROJECT_PATH="$EXECUTE_PATH/$PROJECT_NAME"
 
-find "$TEMPLATE_PATH" -type f |
+cp -R ${TEMPLATE_PATH} ${PROJECT_PATH}
+
+find "$PROJECT_PATH" -type f |
 {
     while IFS= read -r file; do
-        newfile="$PROJECT_PATH${file#$TEMPLATE_PATH}"
-        mkdir -p "$(dirname "$newfile")"
-        sed "s/\[PROJECT_NAME\]/$PROJECT_NAME/g" "$file" > "$newfile"
+        sed -i "s/\[PROJECT_NAME\]/$PROJECT_NAME/g" "$file"
     done
 }

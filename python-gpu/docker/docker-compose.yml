@@ -10,4 +10,8 @@ services:
     environment:
       - SHELL=/bin/bash
     tty: true
-    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]

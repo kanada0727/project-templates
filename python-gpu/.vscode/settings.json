@@ -9,17 +9,16 @@
             "source.organizeImports": true
         },
     },
-    "python.pythonPath": "${workspaceFolder}/.venv/bin/python3",
+    "python.autoComplete.extraPaths": ["${workspaceFolder}/__pypackages__/3.9/lib"],
+    "python.analysis.extraPaths": [ "${workspaceFolder}/__pypackages__/3.9/lib"],
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": [
         "--max-line-length=120",
-        "--ignore E203",
+        "--ignore=E203",
     ],
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
-    "python.formatting.blackPath": "${workspaceFolder}/.venv/bin/black",
-    "python.sortImports.path": "${workspaceFolder}/.venv/bin/isort",
     "python.terminal.activateEnvironment": true, // activate poetry on starting shell
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 500,
@@ -27,12 +26,14 @@
         "**/.git": true,
         "**/.ipynb_checkpoints": true,
         "**/.venv": true,
+        "**/__pypackages__": true,
         "**/__pycache__": true,
     },
     "files.exclude": {
         "**/.git": true,
         "**/.ipynb_checkpoints": true,
         "**/.venv": true,
+        "**/__pypackages__": true,
         "**/__pycache__": true,
     },
     "remote.SSH.localServerDownload": "auto", // cache extension locally and send it on starting container; for speedup

@@ -8,10 +8,10 @@ else
 endif
 
 dc-exec := $(dc) exec app
-python-exec := $(dc-exec) poetry run
+python-exec := $(dc-exec) pdm run
 
-.PHONY: setup setup-development setup-production \
-		create-volumes poetry-install-dev install-labextensions update-password \
+.PHONY: setup setup-development setup-production create-volumes \
+		poetry-install-dev install-labextensions set-jupyter-password \
 		build up down stop start erase sh jupyter
 
 setup:
@@ -19,20 +19,16 @@ setup:
 
 setup-production: build
 
-setup-development: build create-volumes up poetry-install-dev install-labextensions
+setup-development: build create-volumes up pdm-install-dev install-labextensions
 
-poetry-install-dev:
-	$(dc-exec) poetry install
+pdm-install-dev:
+	$(dc-exec) pdm install
 
 install-labextensions:
 	$(dc-exec) sh install_labextensions
 
 create-volumes:
-	docker volume create --name jupyter-config
-	docker volume create --name venv-${PROJECT_NAME}
-
-remove-volumes:
-	docker volume rm venv-${PROJECT_NAME}
+	docker volume create --name local-cache
 
 build:
 	$(dc) build $(ARGS)
@@ -50,14 +46,13 @@ start:
 	$(dc) start
 
 erase:
-	$(dc) down
-	$(MAKE) remove-volumes
+	$(dc) down -v
 
 sh:
 	$(dc-exec) /bin/bash
 
 jupyter:
-	$(python-exec) task jupyter
+	$(python-exec) launch-jupyter
 
-update-password:
-	$(python-exec) task jupyter-update-password
+jupyter-update-password:
+	$(python-exec) jupyter-update-password
