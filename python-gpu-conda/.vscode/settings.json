@@ -1,0 +1,42 @@
+{
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": false,
+        "editor.formatOnType": false,
+        "editor.insertSpaces": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+    },
+    "python.defaultInterpreterPath": "/root/[PROJECT_NAME]/.envs/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=120",
+        "--ignore=E203",
+    ],
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.terminal.activateEnvironment": false, // conda is activated by .bashrc
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 500,
+    "files.watcherExclude": {
+        "**/.git": true,
+        "**/.ipynb_checkpoints": true,
+        "**/.envs": true,
+        "**/__pypackages__": true,
+        "**/__pycache__": true,
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.ipynb_checkpoints": true,
+        "**/.envs": true,
+        "**/__pypackages__": true,
+        "**/__pycache__": true,
+    },
+    "remote.SSH.localServerDownload": "auto", // cache extension locally and send it on starting container; for speedup
+    "remote.autoForwardPorts": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.list.openMode": "doubleClick",
+}

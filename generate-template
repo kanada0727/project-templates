@@ -2,14 +2,14 @@
 
 EXECUTE_PATH=$(pwd)
 SCRIPT_PATH=$(cd "$(dirname "$0")" && pwd)
-TEMPLATES=("python-cpu" "python-gpu")
+TEMPLATES=$(ls -d */ | cut -f1 -d'/') #("python-cpu" "python-gpu" "python-gpu-conda")
 
 help () {
     # Display Help
-   echo "Usage: generate-template [template name] [project name]"
+   echo "Usage: generate-template [template_name] [project_name]"
    echo "arguments:"
-   echo "   template name: one of: [${TEMPLATES[*]}]"
-   echo "   project name: output project name"
+   echo "   template_name: one of [$(echo ${TEMPLATES})]"
+   echo "   project_name: output project name"
 }
 
 contains() {

@@ -1,0 +1,21 @@
+version: "3.0"
+services:
+  app:
+    container_name: [PROJECT_NAME]-app-dev
+    image: [PROJECT_NAME]_app-dev:latest
+    volumes:
+      - ../:/root/[PROJECT_NAME]/
+      - conda-env-[PROJECT_NAME]:/root/[PROJECT_NAME]/.envs/
+      - conda-cache:/root/.conda_cache
+      - ${MODEL_PATH}:/root/[PROJECT_NAME]/models
+      - ${LOG_PATH}:/root/[PROJECT_NAME]/logs
+      - ${DATASET_PATH}:/root/[PROJECT_NAME]/datasets
+      - ~/.ssh/:/root/.ssh/:ro
+      - ~/.gitconfig:/root/.gitconfig:ro
+    ports:
+      - ${JUPYTER_PORT:-8888}:8888
+volumes:
+  conda-env-[PROJECT_NAME]:
+  conda-cache:
+    external: true
+    name: conda-cache

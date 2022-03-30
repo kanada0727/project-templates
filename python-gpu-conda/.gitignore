@@ -1,0 +1,9 @@
+/.envs
+__pypackages__
+**/.ipynb_checkpoints/
+**/__pycache__
+.vscode/*
+!.vscode/settings.json
+/logs
+/datasets
+/models
