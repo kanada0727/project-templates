@@ -7,10 +7,13 @@ services:
       - ../:/root/[PROJECT_NAME]/
       - pypackages-[PROJECT_NAME]:/root/[PROJECT_NAME]/__pypackages__/
       - cache:/root/.cache
+      - ${MODEL_PATH}:/root/[PROJECT_NAME]/models
+      - ${LOG_PATH}:/root/[PROJECT_NAME]/logs
+      - ${DATASET_PATH}:/root/[PROJECT_NAME]/datasets
       - ~/.ssh/:/root/.ssh/:ro
       - ~/.gitconfig:/root/.gitconfig:ro
     ports:
-      - ${port:-8888}:8888
+      - ${JUPYTER_PORT:-8888}:8888
 volumes:
   pypackages-[PROJECT_NAME]:
   cache:

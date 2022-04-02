@@ -4,3 +4,6 @@
 .idea
 .devcontainer
 **/.ipynb_checkpoints
+/logs
+/models
+/datasets

@@ -4,5 +4,6 @@ __pypackages__
 !.vscode/settings.json
 **/.ipynb_checkpoints/
 **/__pycache__
-logs/*
-datasets/*
+/logs
+/models
+/datasets
