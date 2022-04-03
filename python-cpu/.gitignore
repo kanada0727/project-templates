@@ -1,7 +1,6 @@
-.venv
 .vscode/*
 !.vscode/settings.json
 **/.ipynb_checkpoints/
 **/__pycache__
-logs/*
-datasets/*
+__pypackages__
+.pdm.toml

@@ -1,23 +1,23 @@
 #---#
-FROM python:3.8-slim-buster as base
+FROM python:3.9-slim-buster as base
 
 ###-----------------------------------------------
-### poetry builder
+### pdm builder
 ###-----------------------------------------------
-FROM base as poetry-builder
+FROM base as pdm-builder
 RUN apt update && apt install -y curl
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+RUN curl -sSL https://raw.githubusercontent.com/pdm-project/pdm/main/install-pdm.py | python3 -
+
 
 ###-----------------------------------------------
 ### project base
 ###-----------------------------------------------
 FROM base as project-base
-###### --- install poetry ---
-COPY --from=poetry-builder /root/.poetry /root/.poetry
-COPY --from=poetry-builder /root/.bashrc /root/.bashrc
-ENV PATH $PATH:/root/.poetry/bin
-RUN poetry config virtualenvs.in-project true
-
+###### --- install pdm ---
+COPY --from=pdm-builder /root/.local /root/.local
+COPY --from=pdm-builder /root/.bashrc /root/.bashrc
+ENV PATH $PATH:/root/.local/bin
+ENV PYTHONPATH /root/.local/share/pdm/venv/lib/python3.9/site-packages/pdm/pep582
 ###-----------------------------------------------
 ### development
 ###-----------------------------------------------
@@ -31,6 +31,9 @@ RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 ###### --- install basic commands ---
 RUN apt update && apt install -y procps git vim curl tig
+
+###### --- edit bash prompt message to specify location (inside container) cf: https://qiita.com/hmmrjn/items/60d2a64c9e5bf7c0fe60
+RUN echo "PS1='\[\e[1;35m\](INSIDE_CONTAINER)\[\e[0m\] \u:\w \$ '" >> ~/.bashrc
 
 ###### --- setting project path ---
 ###### NOTE: put this code in the end to share cache with other projects
@@ -49,9 +52,9 @@ ENV PROJECT_PATH /root/[PROJECT_NAME]
 WORKDIR $PROJECT_PATH
 
 ###### --- install python packages ---
-COPY ./poetry.lock ./poetry.lock
+COPY ./pdm.lock ./pdm.lock
 COPY ./pyproject.toml ./pyproject.toml
-RUN poetry install --no-dev
+RUN pdm install --prod
 
 ###-----------------------------------------------
 ### production

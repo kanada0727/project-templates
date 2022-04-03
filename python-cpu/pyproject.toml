@@ -1,32 +1,48 @@
-[tool.poetry]
+[project]
 name = "[PROJECT_NAME]"
 version = "0.1.0"
 description = ""
-authors = ["kanada0727 <kanada@pcl.cs.waseda.ac.jp>"]
+authors = [
+    {name = "kanada0727",email = "kanada@pcl.cs.waseda.ac.jp"}
+]
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "hydra-core>=1.2.0.dev1",
+    "scikit-learn",
+]
+requires-python = ">=3.9"
+license = {text = "MIT"}
+
+[project.urls]
+Homepage = ""
+
+[tool.pdm]
+includes = []
+
+[tool.pdm.scripts]
+launch-jupyter= "jupyter lab --allow-root --ip 0.0.0.0"
+jupyter-update-password= "jupyter server password"
 
 [tool.black]
 line-length=120
 
-[tool.taskipy.tasks]
-jupyter= "poetry run jupyter lab --allow-root --ip 0.0.0.0"
-jupyter-update-password= "poetry run jupyter server password"
-
-[tool.poetry.dependencies]
-python = "^3.8"
-numpy = "^1.19.5"
-pandas = "^1.2.1"
-
-[tool.poetry.dev-dependencies]
-jupyterlab = "^3.0.5"
-ipywidgets = "^7.6.3"
-plotly = "^4.14.3"
-cufflinks = "^0.17.3"
-flake8 = "^3.8.4"
-isort = "^5.7.0"
-vulture = "^2.3"
-black = "^20.8b1"
-taskipy = "^1.6.0"
+[tool.pdm.dev-dependencies]
+dev = [
+    "jupyterlab",
+    "ipywidgets",
+    "plotly",
+    "cufflinks",
+    "flake8",
+    "isort",
+    "vulture",
+    "black",
+    "matplotlib",
+    "line-profiler",
+    "memory-profiler",
+]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
