@@ -50,6 +50,9 @@ RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 ###### --- install basic commands ---
 RUN apt update && apt install -y procps git vim curl tig wget jq tmux
 
+###### --- edit bash prompt message to specify location (inside container) cf: https://qiita.com/hmmrjn/items/60d2a64c9e5bf7c0fe60
+RUN echo "PS1='\[\e[1;35m\](INSIDE_CONTAINER)\[\e[0m\] \u:\w \$ '" >> ~/.bashrc
+
 ###### --- setting project path ---
 ###### NOTE: put this code in the end to share cache with other projects
 ENV PROJECT_PATH /root/[PROJECT_NAME]
@@ -67,9 +70,9 @@ ENV PROJECT_PATH /root/[PROJECT_NAME]
 WORKDIR $PROJECT_PATH
 
 ###### --- install python packages ---
-COPY ./poetry.lock ./poetry.lock
+COPY ./pdm.lock ./pdm.lock
 COPY ./pyproject.toml ./pyproject.toml
-RUN poetry install --no-dev
+RUN pdm install --prod
 
 ###-----------------------------------------------
 ### production

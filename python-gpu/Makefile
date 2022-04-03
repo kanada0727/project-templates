@@ -11,24 +11,24 @@ dc-exec := $(dc) exec app
 python-exec := $(dc-exec) pdm run
 
 .PHONY: setup setup-development setup-production create-volumes \
-		poetry-install-dev install-labextensions set-jupyter-password \
-		build up down stop start erase sh jupyter
+		pdm-install-dev install-labextensions \
+		build up down stop start erase sh jupyter jupyter-update-password
 
 setup:
 	$(MAKE) "setup-$(ENV)"
 
-setup-production: build
-
 setup-development: build create-volumes up pdm-install-dev install-labextensions
 
-pdm-install-dev:
-	$(dc-exec) pdm install
-
-install-labextensions:
-	$(dc-exec) sh install_labextensions
+setup-production: build
 
 create-volumes:
 	docker volume create --name local-cache
+
+pdm-install-dev:
+	$(dc-exec) pdm sync
+
+install-labextensions:
+	$(dc-exec) sh install_labextensions
 
 build:
 	$(dc) build $(ARGS)

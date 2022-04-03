@@ -1,5 +1,5 @@
 [project]
-name = "test"
+name = "[PROJECT_NAME]"
 version = "0.1.0"
 description = ""
 authors = [
@@ -9,8 +9,6 @@ dependencies = [
     "numpy",
     "pandas",
     "hydra-core>=1.2.0.dev1",
-    "numpy",
-    "pandas",
     "torch @ https://download.pytorch.org/whl/cu113/torch-1.10.2%2Bcu113-cp39-cp39-linux_x86_64.whl",
     "pytorch-lightning",
     "scikit-learn",
