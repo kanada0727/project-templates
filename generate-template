@@ -2,7 +2,7 @@
 
 EXECUTE_PATH=$(pwd)
 SCRIPT_PATH=$(cd "$(dirname "$0")" && pwd)
-TEMPLATES=$(ls -d */ | cut -f1 -d'/') #("python-cpu" "python-gpu" "python-gpu-conda")
+TEMPLATES=$(cd "$(dirname "$0")" && ls -d */ | cut -f1 -d'/') #("python-cpu" "python-gpu" "python-gpu-conda")
 
 help () {
     # Display Help
