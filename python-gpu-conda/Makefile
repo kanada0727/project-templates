@@ -19,18 +19,16 @@ else
 endif
 
 .PHONY: setup setup-development setup-production create-volumes \
-		poetry-install-dev install-labextensions set-jupyter-password \
-		build up down stop start erase sh jupyter
+		build up down stop start erase sh \
+		conda-deploy conda-export conda-init \
+		install-labextensions jupyter-up jupyter-update-password \
 
 setup:
 	$(MAKE) "setup-$(ENV)"
 
-setup-production: build
-
 setup-development: build create-volumes up conda-deploy
 
-install-labextensions:
-	$(dc-exec) sh install_labextensions
+setup-production: build
 
 create-volumes:
 	docker volume create --name conda-cache
@@ -64,6 +62,9 @@ conda-export:
 
 conda-init:
 	$(conda-exec) create -p /root/[PROJECT_NAME]/.envs -y
+
+install-labextensions:
+	$(dc-exec) sh install_labextensions
 
 jupyter-up:
 	jupyter lab --allow-root --ip 0.0.0.0 --port ${JUPYTER_PORT}

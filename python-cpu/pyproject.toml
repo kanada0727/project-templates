@@ -22,7 +22,7 @@ Homepage = ""
 includes = []
 
 [tool.pdm.scripts]
-launch-jupyter= "jupyter lab --allow-root --ip 0.0.0.0"
+jupyter-up= "jupyter lab --allow-root --ip 0.0.0.0"
 jupyter-update-password= "jupyter server password"
 
 [tool.black]

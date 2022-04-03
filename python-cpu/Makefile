@@ -8,11 +8,11 @@ else
 endif
 
 dc-exec := $(dc) exec app
-python-exec := $(dc-exec) poetry run
+python-exec := $(dc-exec) pdm run
 
 .PHONY: setup setup-development setup-production create-volumes \
 		pdm-install-dev install-labextensions \
-		build up down stop start erase sh jupyter jupyter-update-password
+		build up down stop start erase sh jupyter-up jupyter-update-password
 
 setup:
 	$(MAKE) "setup-$(ENV)"
@@ -52,8 +52,8 @@ erase:
 sh:
 	$(dc-exec) /bin/bash
 
-jupyter:
-	$(python-exec) launch-jupyter
+jupyter-up:
+	$(python-exec) jupyter-up
 
 jupyter-update-password:
 	$(python-exec) jupyter-update-password

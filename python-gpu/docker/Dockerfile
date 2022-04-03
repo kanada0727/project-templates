@@ -72,7 +72,7 @@ WORKDIR $PROJECT_PATH
 ###### --- install python packages ---
 COPY ./pdm.lock ./pdm.lock
 COPY ./pyproject.toml ./pyproject.toml
-RUN pdm install --prod
+RUN pdm sync --prod
 
 ###-----------------------------------------------
 ### production

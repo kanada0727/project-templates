@@ -12,6 +12,7 @@ services:
       - ${DATASET_PATH}:/root/[PROJECT_NAME]/datasets
       - ~/.ssh/:/root/.ssh/:ro
       - ~/.gitconfig:/root/.gitconfig:ro
+      - ~/.jupyter/:/root/.jupyter/
     ports:
       - ${JUPYTER_PORT:-8888}:8888
 volumes:
