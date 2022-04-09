@@ -10,9 +10,8 @@ endif
 dc-exec := $(dc) exec app
 python-exec := $(dc-exec) pdm run
 
-.PHONY: setup setup-development setup-production create-volumes \
-		pdm-install-dev install-labextensions \
-		build up down stop start erase sh jupyter-up jupyter-update-password
+# all targets are phony
+.PHONY: $(shell egrep -o ^[a-zA-Z_-]+: Makefile| sed 's/://')
 
 setup:
 	$(MAKE) "setup-$(ENV)"

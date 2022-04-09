@@ -18,10 +18,8 @@ else
 	conda-exec := $(dc-exec) conda 
 endif
 
-.PHONY: setup setup-development setup-production create-volumes \
-		build up down stop start erase sh \
-		conda-deploy conda-export conda-init \
-		install-labextensions jupyter-up jupyter-update-password \
+# all targets are phony
+.PHONY: $(shell egrep -o ^[a-zA-Z_-]+: Makefile| sed 's/://')
 
 setup:
 	$(MAKE) "setup-$(ENV)"
