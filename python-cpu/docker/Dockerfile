@@ -35,6 +35,12 @@ RUN apt update && apt install -y procps git vim curl tig
 ###### --- edit bash prompt message to specify location (inside container) cf: https://qiita.com/hmmrjn/items/60d2a64c9e5bf7c0fe60
 RUN echo "PS1='\[\e[1;35m\](INSIDE_CONTAINER)\[\e[0m\] \u:\w \$ '" >> ~/.bashrc
 
+##### environment variables for jupyterlab
+ENV JUPYTER_PATH ${PROJECT_PATH}/__pypackages__/3.9/share/jupyter/
+ENV JUPYTERLAB_DIR ${PROJECT_PATH}/__pypackages__/3.9/share/jupyter/lab
+ENV JUPYTERLAB_WORKSPACES_DIR ${PROJECT_PATH}/__pypackages__/3.9/share/jupyter/lab
+ENV JUPYTERLAB_SETTINGS_DIR ${PROJECT_PATH}/__pypackages__/3.9/share/jupyter/lab
+
 ###### --- setting project path ---
 ###### NOTE: put this code in the end to share cache with other projects
 ENV PROJECT_PATH /root/[PROJECT_NAME]
@@ -63,6 +69,7 @@ FROM base as production
 
 ###### --- setting project path ---
 ENV PROJECT_PATH /root/[PROJECT_NAME]
+
 WORKDIR $PROJECT_PATH
 
 COPY ./ ./
