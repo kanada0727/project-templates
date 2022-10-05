@@ -24,7 +24,7 @@ create-volumes:
 	docker volume create --name local-cache
 
 pdm-install-dev:
-	$(dc-exec) pdm sync
+	$(dc-exec) pdm sync --dev
 
 install-labextensions:
 	$(dc-exec) sh install_labextensions

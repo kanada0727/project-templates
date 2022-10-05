@@ -25,7 +25,7 @@ create-volumes:
 	docker volume create --name venv-${PROJECT_NAME}
 
 pdm-install-dev:
-	$(dc-exec) pdm sync
+	$(dc-exec) pdm sync --dev
 
 install-labextensions:
 	$(dc-exec) sh install_labextensions
